@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Super Premium Credit Card</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+   background-color: #030303;
+   color: white;
+   font-family: 'Segoe UI', sans-serif;
+   margin: 0;
+   padding: 0;
+   overflow-x: hidden;
+ }
+
+ .container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 30px;
+   padding: 40px 20px;
+   animation: fadeIn 1s ease-out;
+ }
+
+ .info-box {
+   padding: 30px;
+   border-radius: 10px;
+   background: #111;
+   box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+   transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+   width: 80%;
+   max-width: 800px;
+   margin-top: 10px;
+   cursor: pointer;
+   transform: translateY(10px);
+   opacity: 0;
+   animation: slideUp 1s forwards, fadeIn 1s forwards;
+   border: 2px solid transparent;
+   position: relative;
+ }
+
+ /* Partition styles between sections */
+ .info-box h3 {
+   margin-top: 30px;
+   color: #00ccff;
+   font-size: 1.5em;
+   text-align: center;
+   border-bottom: 2px solid #00ccff;
+   padding-bottom: 10px;
+   margin-bottom: 15px;
+ }
+
+ .info-box p,
+ .info-box ul {
+   margin-top: 15px;
+   font-size: 1.1em;
+   line-height: 1.5;
+ }
+
+ .info-box ul {
+   list-style: none;
+   padding: 0;
+ }
+
+ .info-box ul li {
+   margin: 12px 0;
+   color: #ccc;
+   display: flex;
+   align-items: center;
+   transition: color 0.3s ease;
+   padding: 5px 0;
+ }
+
+ .info-box ul li:hover {
+   color: #00ccff;
+ }
+
+ .info-box i {
+   color: #00ccff;
+   margin-right: 10px;
+   transition: transform 0.3s ease;
+ }
+
+ .info-box ul li:hover i {
+   transform: rotate(360deg);
+ }
+
+ /* Hover Effects */
+ .info-box:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+   background-color: #222;
+   border-color: #00ccff;
+ }
+
+ .info-box h2 {
+   color: #00ccff;
+   font-size: 1.8em;
+   margin-bottom: 20px;
+   text-align: center;
+   transition: transform 0.3s ease;
+ }
+
+ .info-box h2:hover {
+   transform: scale(1.1);
+ }
+
+ footer {
+   text-align: center;
+   padding: 20px;
+   color: #777;
+   background-color: #111;
+   margin-top: 40px;
+   font-size: 14px;
+   transition: background-color 0.3s ease;
+ }
+
+ footer:hover {
+   background-color: #00ccff;
+   color: black;
+ }
+
+ /* Fade In Animation */
+ @keyframes fadeIn {
+   0% { opacity: 0; }
+   100% { opacity: 1; }
+ }
+
+ /* Slide Up Animation */
+ @keyframes slideUp {
+   0% { transform: translateY(10px); opacity: 0; }
+   100% { transform: translateY(0); opacity: 1; }
+ }
+
+ /* Expand Effect */
+ .info-box.open ul {
+   display: block;
+   animation: expand 0.3s ease;
+ }
+
+ /* Expand Animation */
+ @keyframes expand {
+   0% { opacity: 0; }
+   100% { opacity: 1; }
+ }
+
+ /* Hover Effect on Boxes */
+ .info-box:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+   transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+
+ @media (max-width: 768px) {
+   .container {
+     padding: 20px;
+   }
+
+   .info-box {
+     width: 100%;
+   }
+ }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="info-box">
+    <h2>Super Premium Credit Card</h2>
+    <h3>Definition</h3>
+    <p>A Super Premium Credit Card is for those with an exceptional credit history and higher disposable income. It offers ultimate perks and access to luxury experiences.</p>
+    <h3>Features</h3>
+    <ul>
+      <li><i class="fas fa-check-circle"></i>Exclusive luxury services</li>
+      <li><i class="fas fa-check-circle"></i>Personalized concierge services</li>
+      <li><i class="fas fa-check-circle"></i>Priority access to events and experiences</li>
+      <li><i class="fas fa-check-circle"></i>Comprehensive travel insurance</li>
+    </ul>
+    <h3>Benefits</h3>
+    <ul>
+      <li><i class="fas fa-star"></i>Access to luxury lifestyle benefits</li>
+      <li><i class="fas fa-star"></i>Complimentary airport lounge access worldwide</li>
+      <li><i class="fas fa-star"></i>Exclusive rewards programs</li>
+    </ul>
+    <h3>Monthly Allowance</h3>
+    <ul>
+      <li><i class="fas fa-credit-card"></i>Credit Limit: ₹1,00,000 - ₹5,00,000</li>
+      <li><i class="fas fa-cash-register"></i>Cash Withdrawal Limit: 30% of credit limit</li>
+      <li><i class="fas fa-calendar-check"></i>Interest-Free Period: Up to 60 days</li>
+    </ul>
+  </div>
+</div>
+
+<footer>
+  &copy; 2023 Pay Passion. All rights reserved.
+</footer>
+
+</body>
+</html>

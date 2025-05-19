@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Pay Passion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+  <style>
+    body {
+      background-color: #030303;
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: rgba(26, 26, 26, 0.95);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00ccff;
+      animation: blinkLoop 1.5s ease-in-out infinite;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-buttons a {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #005fa3;
+    }
+
+    .hero-section {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-position: center;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero-section h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00ccff;
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .about-card {
+      background-color: #111;
+      border-radius: 10px;
+      padding: 30px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 255, 255, 0.2);
+    }
+
+    .about-card i {
+      font-size: 2.5rem;
+      color: #00ccff;
+      margin-bottom: 20px;
+    }
+
+    .about-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: white;
+    }
+
+    .about-card p {
+      color: #ccc;
+      line-height: 1.6;
+    }
+
+    .team-section {
+      margin-top: 80px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .team-member {
+      background-color: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-10px);
+    }
+
+    .member-info {
+      padding: 20px;
+      text-align: center;
+    }
+
+    .member-info h3 {
+      margin-top: 0;
+      color: #00ccff;
+    }
+
+    .member-info p {
+      color: #ccc;
+      margin: 5px 0;
+    }
+
+    .member-photo {
+      height: 250px;
+      background-color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .member-photo i {
+      font-size: 80px;
+      color: #444;
+    }
+
+    footer {
+      background-color: #111;
+      text-align: center;
+      padding: 30px 20px;
+      margin-top: 80px;
+    }
+
+    footer p {
+      color: #888;
+      margin: 0;
+    }
+
+    @keyframes blinkLoop {
+      0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+      }
+      50% {
+        opacity: 0.4;
+        text-shadow: 0 0 2px #0077cc, 0 0 4px #0077cc;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        height: 300px;
+      }
+      
+      .hero-section h2 {
+        font-size: 2rem;
+      }
+      
+      .hero-section p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pay Passion</h1>
+    <div class="nav-buttons">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('login') }}">Login</a>
+      <a href="{{ url_for('card') }}">Our Cards</a>
+    </div>
+  </header>
+
+  <div class="hero-section">
+    <h2>Who We Are</h2>
+    <p>At Pay Passion, we're revolutionizing the credit card industry with innovative financial solutions that empower our customers.</p>
+  </div>
+
+  <div class="main-content">
+    <h2 class="section-title">Our Story</h2>
+    
+    <div class="about-grid">
+      <div class="about-card">
+        <i class="fas fa-history"></i>
+        <h3>Our History</h3>
+        <p>Founded in 2018, Pay Passion began with a simple mission: to create credit card solutions that are transparent, fair, and customer-focused. We've grown from a small startup to a trusted financial services provider.</p>
+      </div>
+      
+      <div class="about-card">
+        <i class="fas fa-bullseye"></i>
+        <h3>Our Mission</h3>
+        <p>We aim to democratize access to credit by offering innovative financial products that adapt to the unique needs of every customer, regardless of their financial background or credit history.</p>
+      </div>
+      
+      <div class="about-card">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Our Vision</h3>
+        <p>We envision a world where financial services are accessible, transparent, and built around customer needs. We're working to create credit solutions that help people achieve their dreams.</p>
+      </div>
+    </div>
+    
+    <div class="about-grid">
+      <div class="about-card">
+        <i class="fas fa-users"></i>
+        <h3>Customer First</h3>
+        <p>Our customers are at the heart of everything we do. We constantly listen to feedback and innovate to provide the best possible experience and products.</p>
+      </div>
+      
+      <div class="about-card">
+        <i class="fas fa-lock"></i>
+        <h3>Security</h3>
+        <p>We employ industry-leading security measures to protect our customers' data and transactions, ensuring peace of mind with every swipe, tap, or online purchase.</p>
+      </div>
+      
+      <div class="about-card">
+        <i class="fas fa-hand-holding-heart"></i>
+        <h3>Social Responsibility</h3>
+        <p>We believe in giving back to the communities we serve. Through various initiatives, we contribute to financial literacy programs and support local businesses.</p>
+      </div>
+    </div>
+    
+    <div class="team-section">
+      <h2 class="section-title">Our Leadership Team</h2>
+      
+      <div class="team-grid">
+        <div class="team-member">
+          <div class="member-photo">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Mani Shankar</h3>
+            <p>App Developer</p>
+        
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-photo">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Vignesh</h3>
+            <p>Supportive Team Member</p>
+          
+          </div>
+        </div>
+        
+        <div class="team-member">
+          <div class="member-photo">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="member-info">
+            <h3>Sudharsan</h3>
+            <p>Supportive Team Member</p>
+          
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Pay Passion. All rights reserved.</p>
+  </footer>
+</body>
+</html>

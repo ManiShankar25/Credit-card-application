@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apply for Credit Card - Pay Passion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #030303;
+      color: white;
+    }
+
+    header {
+      background-color: rgba(26, 26, 26, 0.95);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00ccff;
+      animation: blinkLoop 1.5s ease-in-out infinite;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      background-color: #0077cc;
+      transition: background-color 0.3s;
+    }
+
+    .nav-links a:hover {
+      background-color: #005fa3;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #ccc;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background-color: #222;
+      color: white;
+      font-size: 1em;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #00ccff;
+    }
+
+    .submit-btn {
+      background-color: #00ccff;
+      color: black;
+      font-weight: bold;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: #0099cc;
+      box-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+    }
+
+    .section-title {
+      grid-column: span 2;
+      color: #00ccff;
+      margin: 20px 0 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    @media (max-width: 768px) {
+      .section-title {
+        grid-column: span 1;
+      }
+    }
+
+    .limit-display {
+      grid-column: span 2;
+      background-color: #1a1a1a;
+      padding: 15px;
+      border-radius: 5px;
+      margin-top: 20px;
+      color: #00ccff;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    @media (max-width: 768px) {
+      .limit-display {
+        grid-column: span 1;
+      }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #888;
+      margin-top: 40px;
+    }
+
+    .flash-messages {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .flash-messages li {
+      background-color: #ff3a3a;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+
+    @keyframes blinkLoop {
+      0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+      }
+      50% {
+        opacity: 0.4;
+        text-shadow: 0 0 2px #0077cc, 0 0 4px #0077cc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pay Passion Credit Cards</h1>
+    <div class="nav-links">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('login') }}">Login</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <h2>Apply for a Credit Card</h2>
+    
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flash-messages">
+          {% for message in messages %}
+            <li>{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    
+    <form action="{{ url_for('apply') }}" method="POST">
+      <div class="form-grid">
+        <div class="section-title">Personal Information</div>
+        
+        <div class="form-group">
+          <label for="firstName">First Name*</label>
+          <input type="text" id="firstName" name="firstName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name*</label>
+          <input type="text" id="lastName" name="lastName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="email">Email Address*</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="phone">Phone Number*</label>
+          <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="dob">Date of Birth*</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="gender">Gender*</label>
+          <select id="gender" name="gender" required>
+            <option value="">Select Gender</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        
+        <div class="section-title">Address Information</div>
+        
+        <div class="form-group">
+          <label for="address">Street Address*</label>
+          <input type="text" id="address" name="address" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="city">City*</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="zip">Zip Code*</label>
+          <input type="text" id="zip" name="zip" required>
+        </div>
+        
+        <div class="section-title">Employment Details</div>
+        
+        <div class="form-group">
+          <label for="occupation">Occupation*</label>
+          <input type="text" id="occupation" name="occupation" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="employment">Employment Type*</label>
+          <select id="employment" name="employment" required>
+            <option value="">Select Employment Type</option>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+            <option value="Self-employed">Self-employed</option>
+            <option value="Unemployed">Unemployed</option>
+            <option value="Student">Student</option>
+            <option value="Retired">Retired</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="creditCard">Do you already have a credit card?*</label>
+          <select id="creditCard" name="creditCard" required>
+            <option value="">Select an option</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="monthlyIncome">Monthly Income*</label>
+          <input type="number" id="monthlyIncome" name="monthlyIncome" min="0" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="annualIncome">Annual Income*</label>
+          <input type="number" id="annualIncome" name="annualIncome" min="0" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="creditCardType">Credit Card Type*</label>
+          <select id="creditCardType" name="creditCardType" required>
+            <option value="">Select Credit Card Type</option>
+            <option value="Regular">Regular Credit Card</option>
+            <option value="Premium">Premium Credit Card</option>
+            <option value="SuperPremium">Super Premium Credit Card</option>
+            <option value="CoBranded">Co-Branded Credit Card</option>
+            <option value="Business">Business Credit Card</option>
+            <option value="Cashback">Cashback Credit Card</option>
+            <option value="Secured">Secured Credit Card</option>
+            <option value="Travel">Travel Credit Card</option>
+          </select>
+        </div>
+        
+        <div class="section-title">Identification Details</div>
+        
+        <div class="form-group">
+          <label for="aadhaarId">Aadhaar ID Number*</label>
+          <input type="text" id="aadhaarId" name="aadhaarId" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="panCard">PAN Card Number*</label>
+          <input type="text" id="panCard" name="panCard" required>
+        </div>
+        
+        <div class="section-title">Account Setup</div>
+        
+        <div class="form-group">
+          <label for="password">Password*</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password*</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        
+        <div class="limit-display" id="limitDisplay">
+          Select a card type and enter your income to see your potential credit limit
+        </div>
+      </div>
+      
+      <button type="submit" class="submit-btn">Submit Application</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Pay Passion. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const monthlyIncomeInput = document.getElementById('monthlyIncome');
+    const cardTypeSelect = document.getElementById('creditCardType');
+    const limitDisplay = document.getElementById('limitDisplay');
+    
+    function updateCreditLimit() {
+      const monthlyIncome = parseFloat(monthlyIncomeInput.value) || 0;
+      const cardType = cardTypeSelect.value;
+      
+      let multiplier = 0;
+      
+      switch(cardType) {
+        case 'Regular':
+          multiplier = 2;
+          break;
+        case 'Premium':
+          multiplier = 3;
+          break;
+        case 'SuperPremium':
+          multiplier = 4;
+          break;
+        case 'CoBranded':
+          multiplier = 2.5;
+          break;
+        case 'Business':
+          multiplier = 5;
+          break;
+        case 'Cashback':
+          multiplier = 2.5;
+          break;
+        case 'Secured':
+          multiplier = 1;
+          break;
+        case 'Travel':
+          multiplier = 3.5;
+          break;
+        default:
+          multiplier = 0;
+      }
+      
+      if (monthlyIncome > 0 && multiplier > 0) {
+        const creditLimit = monthlyIncome * multiplier;
+        limitDisplay.textContent = `Your Estimated Credit Limit: ₹${creditLimit.toLocaleString()}`;
+      } else {
+        limitDisplay.textContent = 'Select a card type and enter your income to see your potential credit limit';
+      }
+    }
+    
+    monthlyIncomeInput.addEventListener('input', updateCreditLimit);
+    cardTypeSelect.addEventListener('change', updateCreditLimit);
+    
+    // Annual income auto-calculation
+    const annualIncomeInput = document.getElementById('annualIncome');
+    
+    monthlyIncomeInput.addEventListener('input', function() {
+      const monthlyIncome = parseFloat(this.value) || 0;
+      annualIncomeInput.value = (monthlyIncome * 12).toFixed(0);
+    });
+  </script>
+</body>
+</html>

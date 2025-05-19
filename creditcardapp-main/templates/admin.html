@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - Pay Passion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #030303;
+      color: white;
+    }
+
+    header {
+      background-color: rgba(26, 26, 26, 0.95);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00ccff;
+      animation: blinkLoop 1.5s ease-in-out infinite;
+    }
+
+    .logout-btn {
+      padding: 8px 15px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .logout-btn:hover {
+      background: #c0392b;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.1);
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-header h2 {
+      color: #00ccff;
+      margin: 0;
+    }
+
+    .status-summary {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .status-box {
+      flex: 1;
+      background-color: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .status-box h3 {
+      margin-top: 0;
+      font-size: 16px;
+      color: #ccc;
+    }
+
+    .status-box .count {
+      font-size: 28px;
+      font-weight: bold;
+      color: #00ccff;
+    }
+
+    .applications-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .applications-table th {
+      background-color: #1a1a1a;
+      padding: 12px;
+      text-align: left;
+      color: #00ccff;
+      font-weight: normal;
+    }
+
+    .applications-table td {
+      padding: 12px;
+      border-top: 1px solid #333;
+    }
+
+    .applications-table tr:hover {
+      background-color: #1a1a1a;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    .btn-small {
+      padding: 5px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: none;
+      color: white;
+    }
+
+    .btn-approve {
+      background-color: #2ecc71;
+    }
+
+    .btn-approve:hover {
+      background-color: #27ae60;
+    }
+
+    .btn-reject {
+      background-color: #e74c3c;
+    }
+
+    .btn-reject:hover {
+      background-color: #c0392b;
+    }
+
+    .btn-pending {
+      background-color: #f39c12;
+    }
+
+    .btn-pending:hover {
+      background-color: #d35400;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .status-approved {
+      background-color: #2ecc71;
+      color: #fff;
+    }
+
+    .status-pending {
+      background-color: #f39c12;
+      color: #fff;
+    }
+
+    .status-rejected {
+      background-color: #e74c3c;
+      color: #fff;
+    }
+
+    .status-review {
+      background-color: #3498db;
+      color: #fff;
+    }
+
+    .search-bar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #444;
+      border-radius: 5px;
+      background-color: #222;
+      color: white;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #00ccff;
+    }
+
+    .search-btn {
+      padding: 10px 15px;
+      background: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-btn:hover {
+      background: #005fa3;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #111;
+      color: #888;
+      margin-top: 40px;
+    }
+
+    @keyframes blinkLoop {
+      0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+      }
+      50% {
+        opacity: 0.4;
+        text-shadow: 0 0 2px #0077cc, 0 0 4px #0077cc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pay Passion Admin Dashboard</h1>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+  </header>
+
+  <div class="container">
+    <div class="dashboard-header">
+      <h2>Application Management</h2>
+      <div class="timestamp">Last updated: <span id="currentTime"></span></div>
+    </div>
+
+    <div class="status-summary">
+      <div class="status-box">
+        <h3>Total Applications</h3>
+        <div class="count" id="total-count">{{ applications|length }}</div>
+      </div>
+      <div class="status-box">
+        <h3>Under Review</h3>
+        <div class="count" id="review-count">{{ applications|selectattr('4', 'equalto', 'Under Review')|list|length }}</div>
+      </div>
+      <div class="status-box">
+        <h3>Approved</h3>
+        <div class="count" id="approved-count">{{ applications|selectattr('4', 'equalto', 'Approved')|list|length }}</div>
+      </div>
+      <div class="status-box">
+        <h3>Pending</h3>
+        <div class="count" id="pending-count">{{ applications|selectattr('4', 'equalto', 'Pending')|list|length }}</div>
+      </div>
+      <div class="status-box">
+        <h3>Rejected</h3>
+        <div class="count" id="rejected-count">{{ applications|selectattr('4', 'equalto', 'Rejected')|list|length }}</div>
+      </div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search by name or email...">
+      <button class="search-btn" onclick="searchApplications()">Search</button>
+    </div>
+
+    <table class="applications-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Occupation</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="applications-tbody">
+        {% for application in applications %}
+        <tr>
+          <td>{{ application[0] }}</td>
+          <td>{{ application[1] }}</td>
+          <td>{{ application[2] }}</td>
+          <td>{{ application[3] }}</td>
+          <td>
+            <span class="status-badge 
+              {% if application[4] == 'Approved' %}
+              status-approved
+              {% elif application[4] == 'Under Review' %}
+              status-review
+              {% elif application[4] == 'Pending' %}
+              status-pending
+              {% elif application[4] == 'Rejected' %}
+              status-rejected
+              {% endif %}
+            ">
+              {{ application[4] }}
+            </span>
+          </td>
+          <td>
+            <div class="action-buttons">
+              <a href="{{ url_for('update_status', user_id=application[0], status='Approved') }}" class="btn-small btn-approve">Approve</a>
+              <a href="{{ url_for('update_status', user_id=application[0], status='Pending') }}" class="btn-small btn-pending">Pending</a>
+              <a href="{{ url_for('update_status', user_id=application[0], status='Rejected') }}" class="btn-small btn-reject">Reject</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Pay Passion. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Update current time
+    function updateTime() {
+      const now = new Date();
+      document.getElementById('currentTime').textContent = now.toLocaleString();
+    }
+    
+    updateTime();
+    setInterval(updateTime, 1000);
+    
+    // Search functionality
+    function searchApplications() {
+      const searchTerm = document.getElementById('search-input').value.toLowerCase();
+      const rows = document.querySelectorAll('#applications-tbody tr');
+      
+      rows.forEach(row => {
+        const name = row.cells[1].textContent.toLowerCase();
+        const email = row.cells[2].textContent.toLowerCase();
+        
+        if (name.includes(searchTerm) || email.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+    
+    // Reset search on page load
+    document.getElementById('search-input').addEventListener('input', function() {
+      if (this.value === '') {
+        document.querySelectorAll('#applications-tbody tr').forEach(row => {
+          row.style.display = '';
+        });
+      }
+    });
+  </script>
+</body>
+</html>

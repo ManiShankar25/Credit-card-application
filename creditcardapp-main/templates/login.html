@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Pay Passion</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #030303;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: rgba(26, 26, 26, 0.95);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #333;
+    }
+
+    header h1 {
+      margin: 0;
+      color: #00ccff;
+      animation: blinkLoop 1.5s ease-in-out infinite;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .nav-buttons a {
+      background-color: #0077cc;
+      color: white;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .nav-buttons a:hover {
+      background-color: #005fa3;
+    }
+
+    .form-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+      min-height: 80vh;
+    }
+
+    .form-container {
+      max-width: 400px;
+      width: 100%;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 255, 255, 0.2);
+      animation: floatCard 6s ease-in-out infinite;
+    }
+
+    h2 {
+      text-align: center;
+      color: #ffffff;
+      margin-bottom: 30px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      margin-top: 20px;
+      font-weight: bold;
+      color: #cccccc;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 6px;
+      border: 1px solid #444;
+      background-color: #121212;
+      color: #ffffff;
+      font-size: 15px;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #00ccff;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: transform 0.5s, opacity 1s;
+    }
+
+    button:active::after {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+      transition: 0s;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    .or-text {
+      text-align: center;
+      margin: 20px 0 10px;
+      color: #888;
+      font-size: 14px;
+    }
+
+    .signup-btn {
+      margin-top: 30px;
+      width: 93%;
+      padding: 14px;
+      font-size: 16px;
+      background-color: #0077cc;
+      color: white;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      display: inline-block; /* Ensures alignment */
+    }
+
+    
+
+    .signup-btn:hover {
+      background-color: #005fa3;
+    }
+
+    .flash-messages {
+      list-style-type: none;
+      padding: 0;
+      margin: 0 0 20px 0;
+    }
+
+    .flash-messages li {
+      background-color: #ff3a3a;
+      color: white;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background-color: rgba(26, 26, 26, 0.95);
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #cccccc;
+    }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes blinkLoop {
+      0%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 10px #00ccff, 0 0 20px #00ccff;
+      }
+      50% {
+        opacity: 0.4;
+        text-shadow: 0 0 2px #0077cc, 0 0 4px #0077cc;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Pay Passion Log In</h1>
+    <div class="nav-buttons">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('aboutus') }}">About Us</a>
+    </div>
+  </header>
+  <div class="form-wrapper">
+    <div class="form-container">
+      <h2>Login</h2>
+      
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <ul class="flash-messages">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      
+      <form action="{{ url_for('login') }}" method="POST">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+        
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+        
+        <button type="submit">Log In</button>
+      </form>
+
+      <p class="or-text">or</p>
+
+      <a href="{{ url_for('apply') }}" class="signup-btn">Sign up</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2023 Pay Passion. All rights reserved.</p>
+  </footer>
+</body>
+</html>
